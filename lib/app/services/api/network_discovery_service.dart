@@ -24,7 +24,7 @@ class NetworkDiscoveryService {
           if (failedCount == total && !completer.isCompleted) {
             completer.completeError(
               Exception(
-                'Aucun serveur backend joignable.\n'
+                'Aucun serveur  joignable.\n'
                 'Vérifiez que le serveur est démarré et que vous êtes\n'
                 'connecté au bon réseau Wi-Fi.',
               ),
