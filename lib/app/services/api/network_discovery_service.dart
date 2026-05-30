@@ -4,8 +4,6 @@ import 'package:http/http.dart' as http;
 class NetworkDiscoveryService {
   /// Liste de toutes les URLs candidates du serveur backend
   static const List<String> _candidateUrls = [
-    'http://192.168.100.39:8000/api',
-    'http://192.168.1.27:8000/api',
     'http://192.168.1.144:8000/api',
   ];
 

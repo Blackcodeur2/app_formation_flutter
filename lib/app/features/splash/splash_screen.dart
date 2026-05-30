@@ -24,6 +24,32 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     _discoverAndConnect();
   }
 
+  Future<void> _discoverAndConnect() async {
+    setState(() {
+      _statusMessage = 'Connexion au serveur...';
+      _hasError = false;
+    });
+
+    try {
+      final url = await NetworkDiscoveryService.discoverServer();
+      ApiConstants.setBaseUrl(url);
+      ApiClient().updateBaseUrl(url);
+
+      if (!mounted) return;
+      setState(() {
+        _statusMessage = 'Serveur trouvé ✓';
+      });
+
+      await ref.read(authProvider.notifier).checkAuthStatus();
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _hasError = true;
+        _statusMessage = e.toString().replaceFirst('Exception: ', '');
+      });
+    }
+  }
+
   void _showManualConfigDialog() {
     final TextEditingController urlController = TextEditingController();
 
